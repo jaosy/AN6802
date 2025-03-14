@@ -23,5 +23,14 @@ def test_result():
     else:
         return(render_template('fail.html'))
 
+@app.route("/foodexp", methods=['post'])
+def foodexp():
+    return(render_template('foodexp.html'))
+
+@app.route("/foodexp_pred", methods=['post', 'get'])
+def foodexp_pred():
+    q = request.form.get('q')
+    return(render_template('foodexp_pred.html', r=(0.48517842*q + 147.47538852370565)))
+
 if __name__=="__main__":
     app.run(debug=True)
