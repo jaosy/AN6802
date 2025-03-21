@@ -1,16 +1,30 @@
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='styles.css') }}"
+  />
 </head>
 
 <body>
-<div class="container">
+  <div class="container">
     <h1>Hi {{name}}, welcome to main menu</h1>
     <form action="/foodexp" method="post">
-        <p><input type="submit" value="Predicion Macro Econ - Food Expenditure"></p>
-    </form>  
+      <p>
+        <input type="submit" value="Prediction - Food Expenditure" />
+      </p>
+    </form>
     <form action="/ethical_test" method="post">
-        <p><input type="submit" value="Ethical Test"></p>
-    </form>  
-</div>
+      <p><input type="submit" value="Ethical Test" /></p>
+    </form>
+    <form action="/faq" method="post">
+      <p><input type="submit" value="FAQ" /></p>
+    </form>
+    <form action="/user_log" method="post">
+      <p><input type="submit" value="View User Log" /></p>
+    </form>
+    <form action="/del_log" method="post">
+      <p><input type="submit" value="Delete User Log" /></p>
+    </form>
+  </div>
 </body>
