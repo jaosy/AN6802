@@ -3,6 +3,9 @@ import datetime
 import sqlite3
 import google.generativeai as genai
 import os
+import markdown
+import re
+import wikipedia
 
 app = Flask(__name__)
 
@@ -30,7 +33,7 @@ def main():
         c.close()
         conn.close()
         flag = 0
-    return render_template("main.html", name=user_name)
+    return render_template("main.html", name=user_name if user_name else "")
 
 
 @app.route("/ethical_test", methods=["post", "get"])
@@ -45,7 +48,7 @@ def faq():
 
 @app.route("/faq1", methods=["POST", "GET"])
 def faq1():
-    q = request.form.get("answer")
+    q = request.form.get("q")
     response = model.generate_content(q)
     print(response.candidates[0].content.parts[0])
     return render_template("faq1.html", r=response.candidates[0].content.parts[0])
@@ -96,5 +99,35 @@ def foodexp_pred():
     return render_template("foodexp_pred.html", r=(0.48517842 * q + 147.47538852370565))
 
 
+@app.route("/foodexp2", methods=["POST", "GET"])
+def foodexp2():
+    return render_template("foodexp2.html")
+
+
+@app.route("/FAQ2", methods=["POST", "GET"])
+def faq2():
+    ques = request.form.get("response")
+    answer = model.generate_content("Risk Assessment")
+    answer = markdown.markdown(answer.text)
+    answer = re.sub(r"<.*?>", "", answer)
+    return render_template("FAQ2.html", answer=answer)
+
+
+@app.route("/FAQ3", methods=["POST", "GET"])
+def faq3():
+    # ques = request.form.get("response")
+    answer = model.generate_content("Economic Indicators")
+    answer = markdown.markdown(answer.text)
+    answer = re.sub(r"<.*?>", "", answer)
+    return render_template("FAQ3.html", answer=answer)
+
+
+@app.route("/FAQ1input", methods=["POST", "GET"])
+def faq1_wiki():
+    ques = request.form.get("ques")
+    r = wikipedia.summary(ques)
+    return render_template("FAQ1input.html", r=r)
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8000)

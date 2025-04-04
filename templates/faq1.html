@@ -10,8 +10,21 @@
   <div class="container">
     <h1>GenAI Response:</h1>
     {{r}}
-    <form action="/main" , methods="POST">
-      <input type="submit" value="Main" />
-    </form>
+    <div style="display: flex; justify-content: center; gap: 20px">
+      <form
+        action="/main"
+        method="POST"
+        style="width: 150px; padding: 10px; text-align: center"
+      >
+        <input type="submit" value="Main Menu" />
+      </form>
+      <form
+        action="/FAQ"
+        method="POST"
+        style="width: 150px; padding: 10px; text-align: center"
+      >
+        <input type="submit" value="FAQ" />
+      </form>
+    </div>
   </div>
 </body>

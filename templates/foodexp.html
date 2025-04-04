@@ -1,18 +1,33 @@
 <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='styles.css') }}"
+  />
 </head>
 
 <body>
-<div class="container">
+  <div class="container">
     <h1>Predict Food Expense</h1>
     <h2>Please enter your income</h2>
-    <form action="/foodexp_pred", methods="POST">
-        <input type="number" step="0.01", name="q"><br>
-        <input type="submit" value="Enter">
+    <form action="/foodexp_pred" , methods="POST">
+      <input type="number" step="0.01" , name="q" /><br />
+      <input type="submit" value="Enter" />
     </form>
-    <form action="/main", methods="POST">
-        <input type="submit" value="Main">
+    <input type="number" id="salary" placeholder="Salary" />
+    <button class="btn" onclick="predict_food_exp()">Enter</button>
+    <p></p>
+    <p class="lead" id="foodexp"></p>
+    <script>
+      function predict_food_exp() {
+        const salary = document.getElementById("salary").value;
+        console.log("salary:" + salary);
+        document.getElementById("foodexp").innerText =
+          "Predicted Food Exp: $" + (salary * 0.4851 + 147.4);
+      }
+    </script>
+    <form action="/main" , methods="POST">
+      <input type="submit" value="Main" />
     </form>
-</div>
+  </div>
 </body>
